@@ -1,9 +1,23 @@
-import Container from "react-bootstrap/Container";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+import { Container, Row, Col, Form } from "react-bootstrap";
 import { Link } from "react-router-dom";
+import { useForm } from "react-hook-form";
+import { RegisterForm } from "./RegisterForm";
+
+import { useYupValidationResolver } from "./validation/ValidationResolver";
+import { ValidationScheme } from "./validation/ValidationScheme";
 
 export default function Register(props: any) {
+  const onSubmit = (data: RegisterForm): void =>
+    console.info(JSON.stringify(data));
+
+  const resolver = useYupValidationResolver(ValidationScheme);
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<any>({
+    resolver,
+  });
   return (
     <div
       className='d-flex flex-column min-vh-100'
@@ -19,63 +33,109 @@ export default function Register(props: any) {
         <div className='d-block' style={{ fontSize: "1.232em" }}>
           <Row>
             <Col className='border-left'>
-              <form className='mb-3' data-testid='registration-form'>
-                <div className='form-group'>
-                  <label htmlFor='firstName'>First name</label>
-                  <input
+              <Form
+                className='mb-3'
+                data-testid='registration-form'
+                onSubmit={handleSubmit(onSubmit)}
+              >
+                <Form.Group>
+                  <Form.Label htmlFor='firstName'>First name</Form.Label>
+                  <Form.Control
                     type='text'
                     className='form-control w-75'
                     id='firstName'
+                    aria-label='firstName'
+                    {...register("firstName")}
                     aria-describedby='firstNameHelp'
+                    isInvalid={!!errors.firstName}
                   />
-                </div>
-                <div className='form-group'>
-                  <label htmlFor='lastName'>Last name</label>
-                  <input
+                  <Form.Control.Feedback type='invalid'>
+                    {errors.firstName?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label htmlFor='lastName'>Last name</Form.Label>
+                  <Form.Control
                     type='text'
                     className='form-control w-75'
                     id='lastName'
+                    aria-label='lastName'
                     aria-describedby='lastNameHelp'
+                    {...register("lastName")}
+                    isInvalid={!!errors.lastName}
                   />
-                </div>
-                <div className='form-group'>
-                  <label htmlFor='emailAddr'>Email address</label>
-                  <input
+                  <Form.Control.Feedback type='invalid'>
+                    {errors.lastName?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label htmlFor='email'>Email address</Form.Label>
+                  <Form.Control
                     type='email'
                     className='form-control w-75'
-                    id='emailAddr'
+                    id='email'
+                    {...register("email")}
                     aria-describedby='emailHelp'
+                    aria-label='email'
+                    isInvalid={!!errors.email}
                   />
-                </div>
-                <div className='form-group'>
-                  <label htmlFor='uniID'>University ID</label>
-                  <input
+                  <Form.Control.Feedback type='invalid'>
+                    {errors.email?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label htmlFor='universityID'>University ID</Form.Label>
+                  <Form.Control
                     type='text'
                     className='form-control w-75'
-                    id='uniID'
-                    aria-describedby='uniIDHelp'
+                    id='universityID'
+                    {...register("universityID")}
+                    aria-describedby='universityIDHelp'
+                    aria-label='universityID'
+                    isInvalid={!!errors.universityID}
                   />
-                </div>
-                <div className='form-group'>
-                  <label htmlFor='password'>Password</label>
-                  <input
+                  <Form.Control.Feedback type='invalid'>
+                    {errors.universityID?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label htmlFor='password'>Password</Form.Label>
+                  <Form.Control
                     type='password'
                     className='form-control w-75'
                     id='password'
+                    {...register("password")}
+                    isInvalid={!!errors.password}
+                    aria-label='password'
                   />
-                </div>
-                <div className='form-group'>
-                  <label htmlFor='confirmPassword'>Confirm password</label>
-                  <input
+                  <Form.Control.Feedback type='invalid'>
+                    {errors.password?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <Form.Group>
+                  <Form.Label htmlFor='confirmPassword'>
+                    Confirm password
+                  </Form.Label>
+                  <Form.Control
                     type='password'
                     className='form-control w-75'
                     id='confirmPassword'
+                    aria-label='confirmPassword'
+                    {...register("confirmPassword")}
+                    isInvalid={!!errors.confirmPassword}
                   />
-                </div>
-                <button type='submit' className='btn btn-primary w-75'>
+                  <Form.Control.Feedback type='invalid'>
+                    {errors.confirmPassword?.message}
+                  </Form.Control.Feedback>
+                </Form.Group>
+                <button
+                  type='submit'
+                  className='btn btn-primary w-75'
+                  data-testid='submit-button'
+                >
                   Submit
                 </button>
-              </form>
+              </Form>
             </Col>
             <Col className='border-left'>
               <Row>
