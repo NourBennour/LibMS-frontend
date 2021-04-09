@@ -37,8 +37,12 @@ export default class Auth extends Component {
               <Col className='border-left'>
                 <h4>Create new account</h4>
                 <div className='mt-1'>
-                  <Link to='/login'>
-                    <button type='button' className='btn btn-primary btn-sm'>
+                  <Link to='/register' data-testid='register-link'>
+                    <button
+                      type='button'
+                      className='btn btn-primary btn-sm'
+                      data-testid='register-button'
+                    >
                       Register
                     </button>
                   </Link>

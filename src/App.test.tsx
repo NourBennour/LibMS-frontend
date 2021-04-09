@@ -17,6 +17,13 @@ it("should contain the login button", () => {
   expect(loginBtn).toBeInTheDocument();
 });
 
+it("should contain the register button", () => {
+  const { getByTestId } = render(<App />);
+  const regBtn = getByTestId("register-button");
+
+  expect(regBtn).toBeInTheDocument();
+});
+
 it("should navigate to the login page", () => {
   const { getByTestId } = renderWithRouter(<App />);
 

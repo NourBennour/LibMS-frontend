@@ -73,9 +73,11 @@ export default class Login extends Component {
                 <Row className='mt-5'>
                   <Col>
                     <h4>Don't have an account?</h4>
-                    <button type='button' className='btn btn-primary btn-sm'>
-                      Register
-                    </button>
+                    <Link to='/register'>
+                      <button type='button' className='btn btn-primary btn-sm'>
+                        Register
+                      </button>
+                    </Link>
                   </Col>
                 </Row>
               </Col>
