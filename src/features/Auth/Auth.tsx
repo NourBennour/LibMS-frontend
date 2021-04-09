@@ -7,7 +7,7 @@ import Col from "react-bootstrap/Col";
 export default class Auth extends Component {
   render() {
     return (
-      <body
+      <div
         className='d-flex flex-column min-vh-100'
         style={{ backgroundColor: "#F6F8FB" }}
       >
@@ -23,8 +23,12 @@ export default class Auth extends Component {
               <Col className='border-left'>
                 <h4>SMU Students, Faculty and Staff</h4>
                 <div className='mt-1'>
-                  <Link to='/login'>
-                    <button type='button' className='btn btn-primary btn-sm'>
+                  <Link to='/login' data-testid='login-link'>
+                    <button
+                      type='button'
+                      className='btn btn-primary btn-sm'
+                      data-testid='login-button'
+                    >
                       Log in
                     </button>
                   </Link>
@@ -64,7 +68,7 @@ export default class Auth extends Component {
             </Row>
           </div>
         </Container>
-      </body>
+      </div>
     );
   }
 }

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 export default class Login extends Component {
   render() {
     return (
-      <body
+      <div
         className='d-flex flex-column min-vh-100'
         style={{ backgroundColor: "#F6F8FB" }}
       >
@@ -21,7 +21,7 @@ export default class Login extends Component {
           <div className='d-block' style={{ fontSize: "1.232em" }}>
             <Row>
               <Col className='border-left'>
-                <form className='mb-3'>
+                <form className='mb-3' data-testid='login-form'>
                   <div className='form-group'>
                     <label htmlFor='emailAddr'>Email address</label>
                     <input
@@ -82,7 +82,7 @@ export default class Login extends Component {
             </Row>
           </div>
         </Container>
-      </body>
+      </div>
     );
   }
 }

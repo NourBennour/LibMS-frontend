@@ -1,15 +1,28 @@
-import React from 'react';
-import { render } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { store } from './app/store';
-import App from './App';
+import { Router } from "react-router-dom";
+import { render, fireEvent } from "@testing-library/react";
+import { createMemoryHistory } from "history";
+import App from "./App";
 
-test('renders learn react link', () => {
-  const { getByText } = render(
-    <Provider store={store}>
-      <App />
-    </Provider>
-  );
+const renderWithRouter = (component: JSX.Element) => {
+  const history = createMemoryHistory();
+  return {
+    ...render(<Router history={history}>{component}</Router>),
+  };
+};
 
-  expect(getByText(/learn/i)).toBeInTheDocument();
+it("should contain the login button", () => {
+  const { getByTestId } = render(<App />);
+  const loginBtn = getByTestId("login-button");
+
+  expect(loginBtn).toBeInTheDocument();
+});
+
+it("should navigate to the login page", () => {
+  const { getByTestId } = renderWithRouter(<App />);
+
+  fireEvent.click(getByTestId("login-link"), { button: 0 });
+
+  const form = getByTestId("login-form");
+
+  expect(form).toBeInTheDocument();
 });
