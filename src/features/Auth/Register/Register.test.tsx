@@ -1,5 +1,5 @@
 import { Router } from "react-router-dom";
-import { render, fireEvent, findByText } from "@testing-library/react";
+import { render, fireEvent } from "@testing-library/react";
 import { createMemoryHistory } from "history";
 import Register from "./Register";
 import { act } from "react-dom/test-utils";
@@ -31,26 +31,6 @@ describe("First name validation", () => {
       fireEvent.click(getSbmtBtn);
     });
     expect(container.innerHTML).toMatch("First name is required");
-  });
-});
-
-describe("SMU email domain validation", () => {
-  it("should display correct email domain error message", async () => {
-    const { getByTestId, getByLabelText, container } = renderWithRouter(
-      <Register />
-    );
-    const getSbmtBtn = getByTestId("submit-button");
-
-    await act(async () => {
-      const emailInput = getByLabelText("Email address");
-      fireEvent.change(emailInput, {
-        target: { value: "mootez.saad@medkek.tn" },
-      });
-      fireEvent.click(getSbmtBtn);
-    });
-    expect(container.innerHTML).toMatch(
-      "Only SMU (medtech.tn, msb.tn or smu.tn) domain names are allowed"
-    );
   });
 });
 

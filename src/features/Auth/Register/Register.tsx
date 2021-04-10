@@ -7,6 +7,8 @@ import { useYupValidationResolver } from "./validation/ValidationResolver";
 import { ValidationScheme } from "./validation/ValidationScheme";
 
 export default function Register(props: any) {
+  const validEmailDomains = ['smu.tn', 'msb.tn', 'medtech.tn', 'lci.tn'];
+
   const onSubmit = (data: RegisterForm): void =>
     console.info(JSON.stringify(data));
 
@@ -42,7 +44,7 @@ export default function Register(props: any) {
                   <Form.Label htmlFor='firstName'>First name</Form.Label>
                   <Form.Control
                     type='text'
-                    className='form-control w-75'
+                    className='w-75'
                     id='firstName'
                     aria-label='firstName'
                     {...register("firstName")}
@@ -57,7 +59,7 @@ export default function Register(props: any) {
                   <Form.Label htmlFor='lastName'>Last name</Form.Label>
                   <Form.Control
                     type='text'
-                    className='form-control w-75'
+                    className='w-75'
                     id='lastName'
                     aria-label='lastName'
                     aria-describedby='lastNameHelp'
@@ -68,26 +70,50 @@ export default function Register(props: any) {
                     {errors.lastName?.message}
                   </Form.Control.Feedback>
                 </Form.Group>
-                <Form.Group>
-                  <Form.Label htmlFor='email'>Email address</Form.Label>
-                  <Form.Control
-                    type='email'
-                    className='form-control w-75'
-                    id='email'
-                    {...register("email")}
-                    aria-describedby='emailHelp'
-                    aria-label='email'
-                    isInvalid={!!errors.email}
-                  />
-                  <Form.Control.Feedback type='invalid'>
-                    {errors.email?.message}
-                  </Form.Control.Feedback>
-                </Form.Group>
+                <Form.Row>
+                  <Form.Group as={Col}>
+                    <Form.Label htmlFor='emailName'>Email name</Form.Label>
+                    <Form.Control
+                      type='text'
+                      id='emailName'
+                      className='w-100'
+                      {...register("emailName")}
+                      aria-describedby='emailNameHelp'
+                      aria-label='emailName'
+                      isInvalid={!!errors.emailName}
+                    />
+                    <Form.Control.Feedback type='invalid'>
+                      {errors.emailName?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                  <Form.Group as={Col}>
+                    <Form.Label htmlFor='emailDomain'>Email domain</Form.Label>
+                    <Form.Control
+                      as='select'
+                      id='emailDomain'
+                      className='w-50'
+                      {...register("emailDomain")}
+                      aria-describedby='emailDomainHelp'
+                      aria-label='emailDomain'
+                      isInvalid={!!errors.emailDomain}
+                    >
+                      { 
+                        validEmailDomains.map(emailDomain => {
+                          let emailAddress = "@" + emailDomain;
+                          return (<option key={emailDomain} value={emailAddress}>{emailAddress}</option>)
+                        })
+                      }
+                    </Form.Control>
+                    <Form.Control.Feedback type='invalid'>
+                      {errors.emailDomain?.message}
+                    </Form.Control.Feedback>
+                  </Form.Group>
+                </Form.Row>
                 <Form.Group>
                   <Form.Label htmlFor='universityID'>University ID</Form.Label>
                   <Form.Control
                     type='text'
-                    className='form-control w-75'
+                    className='w-75'
                     id='universityID'
                     {...register("universityID")}
                     aria-describedby='universityIDHelp'
@@ -102,7 +128,7 @@ export default function Register(props: any) {
                   <Form.Label htmlFor='password'>Password</Form.Label>
                   <Form.Control
                     type='password'
-                    className='form-control w-75'
+                    className='w-75'
                     id='password'
                     {...register("password")}
                     isInvalid={!!errors.password}
@@ -118,7 +144,7 @@ export default function Register(props: any) {
                   </Form.Label>
                   <Form.Control
                     type='password'
-                    className='form-control w-75'
+                    className='w-75'
                     id='confirmPassword'
                     aria-label='confirmPassword'
                     {...register("confirmPassword")}
