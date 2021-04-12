@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './features/Auth/Login/Login';
 import Register from './features/Auth/Register/Register';
 import Footer from './Shared/Footer';
+import Main from './features/Main/Main';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 
@@ -11,7 +12,8 @@ function App() {
     <Router>
       <div className="App"></div>
       <Switch>
-        <Route exact path="/" component={Auth} />
+        <Route exact path="/" component={Main}></Route>
+        <Route exact path="/auth" component={Auth} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
       </Switch>

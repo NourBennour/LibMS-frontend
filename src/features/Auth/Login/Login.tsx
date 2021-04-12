@@ -9,7 +9,7 @@ export default class Login extends Component {
   render() {
     return (
       <>
-        <Header title="My SMU-Library Account" navItems={[]} />
+        <Header title="My SMU-Library Account" navItems={[]} account={false} />
         <div
           className="d-flex flex-column min-vh-100"
           style={{ backgroundColor: '#F6F8FB' }}
