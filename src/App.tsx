@@ -2,6 +2,7 @@ import Auth from './features/Auth/Auth';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Login from './features/Auth/Login/Login';
 import Register from './features/Auth/Register/Register';
+import AddBook from './features/BookRsv/BookAdding/AddBook';
 import Footer from './Shared/Footer';
 import Main from './features/Main/Main';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -16,6 +17,7 @@ function App() {
         <Route exact path="/auth" component={Auth} />
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
+        <Route exact path="/addBook" component={AddBook} />
       </Switch>
       <Footer />
     </Router>
