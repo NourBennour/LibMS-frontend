@@ -3,8 +3,8 @@ import * as yup from 'yup';
 export const ValidationSchema = yup.object().shape({
   isbn: yup
     .string()
-    .max(13, 'ISBN should be of 13 digits')
-    .min(13, 'ISBN should be of 13 digits')
+    .min(10, 'ISBN should be at least of 10 digits')
+    .max(13, 'ISBN should be at most of 13 digits')
     .matches(/^\d+$/, 'ISBN should contain digits only')
     .required('ISBN is required'),
   title: yup.string().required('Title is required'),
