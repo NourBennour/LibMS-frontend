@@ -1,9 +1,36 @@
-import { Component } from 'react';
+import { Component, useEffect, useState } from 'react';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Header from '../../../Shared/Header';
+
+function LoginF ( ) {
+  const [email,setEmail]=useState(""); 
+  const [password,setPassword]=useState("");
+  const history =useHistory(); 
+  useEffect (() => {
+    if (localStorage.getItem('user-info')) {
+      history.push("/add")
+    }
+  }, [])
+
+  async function LoginF(){
+    console.warn(email,password)
+    let item={email,password};
+    let result= await fetch("http://localhost:3000/login",{
+      method:'POST',
+      headers:{
+        "Content-Type":"application/json",
+        "Accept":"application/json"
+      },
+      body:JSON.stringify(item)
+    });
+    result = await result.json() 
+    localStorage.setItem("user-info",JSON.stringify(result))
+    history.push("/add")
+  }};
+
 
 export default class Login extends Component {
   render() {
@@ -32,6 +59,8 @@ export default class Login extends Component {
                         className="form-control w-75"
                         id="emailAddr"
                         aria-describedby="emailHelp"
+                        //for validation
+                        //onChange={(e)=>setEmail(e.target.value)}
                       />
                       <small id="emailHelp" className="form-text text-muted">
                         We'll never share your email with anyone else.
@@ -43,9 +72,11 @@ export default class Login extends Component {
                         type="password"
                         className="form-control w-75"
                         id="password"
+                        //for validation
+                        //onChange={(e)=>setPassword(e.target.value)}
                       />
                     </div>
-                    <button type="submit" className="btn btn-primary w-75">
+                    <button type="submit" className="btn btn-primary w-75" onClick={LoginF}>
                       Submit
                     </button>
                   </form>
@@ -92,6 +123,7 @@ export default class Login extends Component {
           </Container>
         </div>
       </>
-    );
-  }
-}
+   
+   );
+    } } 
+  
